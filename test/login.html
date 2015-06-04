@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Login</title>
+<link rel="stylesheet" type="text/css" href="loginstyle.css">
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="script.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+
+<div class ="header">
+The New Store Website
+</div> 
+<div class = "container">
+
+
+<div class = "register">
+<p>
+Please enter a username and password:</p>
+
+<p>Username<br /> <input id="newuser" type="text" name="newuser"><br />
+  Password<br /> <input id="newpass" type="password" name="newpass"><br>
+  <input id="registerbtn" type="submit" value = "Submit">
+  </p>
+</p>
+<p>
+  <textarea readonly="readonly" id="regstatus" ></textarea>
+</p>
+</div>
+<div class = "login">
+<p>
+Please enter your login information:</p>
+<form action="login.php" method="POST">
+Username<br /> <input type="text" id="username" name="username" placeholder="username"><br />
+Password<br /> <input id="password" name="password" placeholder="**********" type="password"><br>
+<input id="loginbtn" type="submit" value = "Submit">
+</form>
+</div>
+
+
+</div>
+</body>
+</html>
