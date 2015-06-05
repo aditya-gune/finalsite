@@ -25,6 +25,45 @@ setInterval(function(){
 	$( ".tablediv" ).load( "fetchapps.php" );
 }, 10000);
 
+function checkUsername(val) {
+  $.post("checkusername.php", {newuser : $( '#newuser' ).val()},function(data){$('#regstatus').val(data)} );
+}
+
+$(document).ready(
+	function() {
+    	$('#registerbtn').click( function(event)
+		{	
+		event.preventDefault();
+		if($('#regstatus').val() != "Username already taken."){
+				if($( '#newuser' ).val() != '' && $( '#newpass' ).val() != ''){
+					$.post("register.php", 
+						{
+							newuser : $( '#newuser' ).val(),
+							newpass : $( '#newpass' ).val(),
+						}, 
+						function(data){$('#regstatus').val(data)});		
+				}
+		}
+		});
+	}
+);
+$(document).ready(
+	function() {
+    	$('#loginbtn').click( function(event)
+		{
+			event.preventDefault();
+			$.post("login.php", 
+				{
+					username : $( '#username' ).val(),
+					password : $( '#password' ).val(),
+				}, 
+				function(data){$('#logstatus').val(data)});
+		});
+	}
+);
+
+
+
 function checkDate(field)
   {
     var allowBlank = true;

@@ -17,17 +17,17 @@ if ($mysqli->connect_errno) {
 <body>
 <div class="header">
 <img src="header.jpg" text="iApply. Making job applications easier." />
-register
 </div>
 <div class="container">
 <div class = "menu">
 <ul>
-  <li><a href="index.php">Home</a></li>
-  <li><a href="me.php">My Profile</a></li>
-  <li><a href="apps.php">My Applications</a></li>
-  <li><a href="about.php">About Us</a></li>
+  <li><a class="listitem" href="index.php">Home</a></li>
+  <li><a class="listitem" href="me.php">My Profile</a></li>
+  <li><a class="listitem" href="apps.php">My Applications</a></li>
+  <li><a class="listitem" href="about.php">About Us</a></li>
 </ul>
 </div>
+
 <?php 
 if(!isset($_SESSION["username"])){
 		echo '<h2>Please log in to view your applications: </h2>';
@@ -58,10 +58,19 @@ function fetchDB(){
 	}
 }
 if(isset($_SESSION["username"])){
-	echo "Welcome, " . $_SESSION["username"] . "!<br>";
+	echo "Welcome, " . $_SESSION["username"] . "!";
+	echo '<div class="accountoptions"> <a href="apps.php?logout=1"><button class="btn">Log Out</button></a></div>';
+}
+
+if(isset($_GET['logout'])){
+		session_unset();
+		session_destroy();
+		echo "<script> location.reload();</script>";
+		echo "<h2>You have been successfully logged out.</h2>";
+		exit;
 }
 ?>
-		<div class = "body1">
+<div class = "body1">
   
 <div class = "addapp">
 <h2> Add a New Application </h2>
