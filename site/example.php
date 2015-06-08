@@ -1,16 +1,16 @@
-<?php	
-	require_once('preheader.php'); // <-- this include file MUST go first before any HTML/output
+<?php
+
+	require_once('../preheader.php'); // <-- this include file MUST go first before any HTML/output
 
 	#the code for the class
-	include ('ajaxCRUD.class.php'); // <-- this include file MUST go first before any HTML/output
-	//ini_set('Display errors', 'On');
+	include ('../ajaxCRUD.class.php'); // <-- this include file MUST go first before any HTML/output
 
     #this one line of code is how you implement the class
     ########################################################
     ##
 
-    $appstable = new ajaxCRUD("Applications", "applications", "id", "username", "position", "company", "status", "date_applied", "date_closing", "fileupload");
-	$username = $_SESSION['username'];
+    $tblDemo = new ajaxCRUD("Item", "tblDemo", "pkID", "../");
+
     ##
     ########################################################
 
@@ -24,88 +24,88 @@
     //$tblDemo->defineRelationship("fkID", "tblDemoRelationship", "pkID", "fldName", "fldSort DESC"); //use your own table - this table (tblDemoRelationship) not included in the installation script
 
     #i don't want to visually show the primary key in the table
-    $appstable->omitPrimaryKey();
+    $tblDemo->omitPrimaryKey();
 
     #the table fields have prefixes; i want to give the heading titles something more meaningful
-    $appstable->displayAs("position", "Position");
-    $appstable->displayAs("company", "Company");
-    $appstable->displayAs("status", "Status");
-    $appstable->displayAs("date_applied", "Date Applied");
-    $appstable->displayAs("date_closing", "Date Closing");
-	$appstable->displayAs("fileupload", "Files");
+    $tblDemo->displayAs("fldField1", "Field1");
+    $tblDemo->displayAs("fldField2", "Field2");
+    $tblDemo->displayAs("fldCertainFields", "Valid Value Field");
+    $tblDemo->displayAs("fldLongField", "Long Field");
+    $tblDemo->displayAs("fldCheckbox", "Is Selected?");
+
 	#set the textarea height of the longer field (for editing/adding)
     #http://ajaxcrud.com/api/index.php?id=setTextareaHeight
-    $appstable->setTextareaHeight('fldLongField', 150);
+    $tblDemo->setTextareaHeight('fldLongField', 150);
 
     #i could omit a field if I wanted
     #http://ajaxcrud.com/api/index.php?id=omitField
-    $appstable->omitField("username");
+    //$tblDemo->omitField("fldField2");
 
     #i could omit a field from being on the add form if I wanted
-    //$appstable->omitAddField("fldField2");
+    //$tblDemo->omitAddField("fldField2");
 
     #i could disallow editing for certain, individual fields
-    //$appstable->disallowEdit('fldField2');
+    //$tblDemo->disallowEdit('fldField2');
 
     #i could set a field to accept file uploads (the filename is stored) if wanted
-    $appstable->setFileUpload("fileupload", "");
+    //$tblDemo->setFileUpload("fldField2", "uploads/");
 
     #i can have a field automatically populate with a certain value (eg the current timestamp)
     //$tblDemo->addValueOnInsert("fldField1", "NOW()");
 
     #i can use a where field to better-filter my table
-    $appstable->addWhereClause("WHERE (username = \"$username\")");
+    //$tblDemo->addWhereClause("WHERE (fldField1 = 'test')");
 
     #i can order my table by whatever i want
-    //$appstable->addOrderBy("ORDER BY fldField1 ASC");
+    //$tblDemo->addOrderBy("ORDER BY fldField1 ASC");
 
     #i can set certain fields to only allow certain values
     #http://ajaxcrud.com/api/index.php?id=defineAllowableValues
-    $allowableValues = array("In Progress", "Applied", "Interview", "Received Offer", "Accepted Offer", "No Offer");
-    $appstable->defineAllowableValues("status", $allowableValues);
+    $allowableValues = array("Allowable Value1", "Allowable Value2", "Dropdown Value", "CRUD");
+    $tblDemo->defineAllowableValues("fldCertainFields", $allowableValues);
 
     //set field fldCheckbox to be a checkbox
-    //$appstable->defineCheckbox("fldCheckbox");
+    $tblDemo->defineCheckbox("fldCheckbox");
 
     #i can disallow deleting of rows from the table
     #http://ajaxcrud.com/api/index.php?id=disallowDelete
-    //$appstable->disallowDelete();
+    //$tblDemo->disallowDelete();
 
     #i can disallow adding rows to the table
     #http://ajaxcrud.com/api/index.php?id=disallowAdd
-    $appstable->disallowAdd();
+    //$tblDemo->disallowAdd();
 
     #i can add a button that performs some action deleting of rows for the entire table
     #http://ajaxcrud.com/api/index.php?id=addButtonToRow
-    //$appstable->addButtonToRow("Add", "add_item.php", "all");
+    //$tblDemo->addButtonToRow("Add", "add_item.php", "all");
 
     #set the number of rows to display (per page)
-    $appstable->setLimit(60);
+    $tblDemo->setLimit(30);
 
 	#set a filter box at the top of the table
-    //$appstable->addAjaxFilterBox('fldField1');
+    //$tblDemo->addAjaxFilterBox('fldField1');
 
     #if really desired, a filter box can be used for all fields
-    //$appstable->addAjaxFilterBoxAllFields();
+    $tblDemo->addAjaxFilterBoxAllFields();
 
     #i can set the size of the filter box
-    //$appstable->setAjaxFilterBoxSize('fldField1', 3);
+    //$tblDemo->setAjaxFilterBoxSize('fldField1', 3);
 
 	#i can format the data in cells however I want with formatFieldWithFunction
 	#this is arguably one of the most important (visual) functions
-	//$appstable->formatFieldWithFunction('fldField1', 'makeBlue');
-	//$appstable->formatFieldWithFunction('fldField2', 'makeBold');
+	$tblDemo->formatFieldWithFunction('fldField1', 'makeBlue');
+	$tblDemo->formatFieldWithFunction('fldField2', 'makeBold');
 
-	//$appstable->modifyFieldWithClass("fldField1", "zip required"); 	//for testing masked input functionality
-	//$appstable->modifyFieldWithClass("fldField2", "phone");			//for testing masked input functionality
+	//$tblDemo->modifyFieldWithClass("fldField1", "zip required"); 	//for testing masked input functionality
+	//$tblDemo->modifyFieldWithClass("fldField2", "phone");			//for testing masked input functionality
 
-	//$appstable->onAddExecuteCallBackFunction("mycallbackfunction"); //uncomment this to try out an ADD ROW callback function
+	//$tblDemo->onAddExecuteCallBackFunction("mycallbackfunction"); //uncomment this to try out an ADD ROW callback function
 
-	$appstable->deleteText = "delete";
+	$tblDemo->deleteText = "delete";
 
 ?>
 		<div style="float: left">
-			You have <b><?=$appstable->insertRowsReturned();?> </b> applications.<br />
+			Total Returned Rows: <b><?=$tblDemo->insertRowsReturned();?></b><br />
 		</div>
 
 		<div style="clear:both;"></div>
@@ -113,7 +113,7 @@
 <?php
 
 	#actually show the table
-	$appstable->showTable();
+	$tblDemo->showTable();
 
 	#my self-defined functions used for formatFieldWithFunction
 	function makeBold($val){

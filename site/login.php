@@ -1,6 +1,5 @@
 <?php
 session_start();
-//ini_set('display_errors', 'On');
 //echo "session started";
 $mysqli = new mysqli("oniddb.cws.oregonstate.edu", "gunea-db", "5c7NIUQDT4UN1mvB", "gunea-db");
 if ($mysqli->connect_errno) {

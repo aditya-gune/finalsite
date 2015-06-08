@@ -1,30 +1,5 @@
 // JavaScript Document
-$(document).ready(
-	function() {
-    	$('#addbtn').click( function()
-		{
-			$.post("addapp.php", 
-				{
-					username : $( '#username' ).val(),
-					position : $( '#position' ).val(),
-					company : $( '#company' ).val(),
-					status : $( '#status' ).val(),
-					date_applied : $( '#date_applied' ).val(),
-					date_closing : $( '#date_closing' ).val(),
-					
-				}, 
-				function(data){$('#addstatus').val(data)});
-		});
-	}
-);
-
-$(document).ready(function(){
-	$( ".tablediv" ).load( "fetchapps.php" );
-});
-setInterval(function(){
-	$( ".tablediv" ).load( "fetchapps.php" );
-}, 10000);
-
+/*All functions for index.php*/
 function checkUsername(val) {
   $.post("checkusername.php", {newuser : $( '#newuser' ).val()},function(data){$('#regstatus').val(data)} );
 }
@@ -63,12 +38,40 @@ $(document).ready(
 );
 
 
+/*All functions for apps.php*/
+$(document).ready(
+	function() {
+    	$('#addbtn').click( function()
+		{
+			$.post("addapp.php", 
+				{
+					username : $( '#username' ).val(),
+					position : $( '#position' ).val(),
+					company : $( '#company' ).val(),
+					status : $( '#status' ).val(),
+					date_applied : $( '#date_applied' ).val(),
+					date_closing : $( '#date_closing' ).val(),
+					fileupload : $( '#fileupload' ).val(),
+				}, 
+				function(data){$('#addstatus').val(data)});
+				document.getElementById("newapp").reset()
+		});
+	}
+);
+
+
+setInterval(function(){
+	$( ".tablediv" ).load( "fetchapps.php" );
+}, 10000);
+
+
+
+
+
 
 function checkDate(field)
   {
     var allowBlank = true;
-    var maxYear = (new Date()).getFullYear();
-
     var errorMsg = "";
 
     // regular expression to match required date format
@@ -76,8 +79,8 @@ function checkDate(field)
 
     if(field.value != '') {
       if(regs = field.value.match(re)) {
-          if(regs[1] < 1900 || regs[1] > maxYear) {
-          	errorMsg = "Invalid value for year: " + regs[3] + " - must be between " + 1900 + " and " + maxYear;
+          if(regs[1] < 1900 || regs[1] > 2020) {
+          	errorMsg = "Invalid value for year: " + regs[3] + " - must be between " + 1900 + " and " + 2020;
         } else if(regs[2] < 1 || regs[2] > 12){
           	errorMsg = "Invalid value for month: " + regs[1];
         } else if(regs[3] < 1 || regs[3] > 31) {

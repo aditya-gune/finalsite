@@ -22,7 +22,6 @@ if ($mysqli->connect_errno) {
 <div class = "menu">
 <ul>
   <li><a class="listitem" href="index.php">Home</a></li>
-  <li><a class="listitem" href="me.php">My Profile</a></li>
   <li><a class="listitem" href="apps.php">My Applications</a></li>
   <li><a class="listitem" href="about.php">About Us</a></li>
 </ul>
@@ -67,7 +66,7 @@ if(!isset($_SESSION["username"])){
 		echo '<div class = "register">';
 		echo "<p>Don't have an account? Register here!</p>";
 		echo '<form action="index.php" method="POST">'; 
-		echo '<p>Username<br /> <input id="newuser" type="text" name="newuser" onchange="checkUsername(this.value)" required>  <textarea readonly="readonly" id="regstatus" ></textarea><br />';
+		echo '<p>Username<br /> <input id="newuser" type="text" name="newuser" onchange="checkUsername(this.value)" required>  <textarea class="stopselect" readonly="readonly" id="regstatus" ></textarea><br />';
   		echo 'Password<br /> <input id="newpass" type="password" name="newpass" required><br>';
   		echo '<input id="registerbtn" type="submit" value = "Submit" onclick ="location.reload()">';
 		echo '</form>';
